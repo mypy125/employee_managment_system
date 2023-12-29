@@ -3,42 +3,64 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeDirectory {
-    private List<Employee> employeeList;
+public class EmployeeManagementSystem {
+    private List<Employee> employees;
+    private List<Department> departments;
 
-    public EmployeeDirectory() {
-        this.employeeList = new ArrayList<>();
+    public EmployeeManagementSystem() {
+        this.employees = new ArrayList<>();
+        this.departments = new ArrayList<>();
     }
 
-    public void addEmployee(int employeeId, String phoneNumber, String name, int experience) {
-        Employee employee = new Employee(employeeId, phoneNumber, name, experience);
-        employeeList.add(employee);
+    public void addEmployee(Employee employee) {
+        employees.add(employee);
     }
 
-    public List<Employee> findEmployeesByExperience(int targetExperience) {
-        List<Employee> result = new ArrayList<>();
-        for (Employee employee : employeeList) {
-            if (employee.getExperience() == targetExperience) {
-                result.add(employee);
-            }
+    public void addDepartment(Department department) {
+        departments.add(department);
+    }
+
+    public void assignEmployeeToDepartment(String employeeId, String departmentId) {
+        Employee employee = findEmployeeById(employeeId);
+        Department department = findDepartmentById(departmentId);
+
+        if (employee != null && department != null) {
+            employee.assignDepartment(department);
+        } else {
+            System.out.println("Employee or Department not found.");
         }
-        return result;
     }
 
-    public List<String> findPhoneNumbersByName(String targetName) {
-        List<String> result = new ArrayList<>();
-        for (Employee employee : employeeList) {
-            if (employee.getName().equalsIgnoreCase(targetName)) {
-                result.add(employee.getPhoneNumber());
+    public void displayEmployeeInformation(String employeeId) {
+        Employee employee = findEmployeeById(employeeId);
+        if (employee != null) {
+            System.out.println("Employee ID: " + employee.getEmployeeId());
+            System.out.println("Employee Name: " + employee.getEmployeeName());
+            System.out.println("Salary: $" + employee.getSalary());
+            Department department = employee.getDepartment();
+            if (department != null) {
+                System.out.println("Department: " + department.getDepartmentName());
+            } else {
+                System.out.println("Department: Not Assigned");
             }
+        } else {
+            System.out.println("Employee not found with ID: " + employeeId);
         }
-        return result;
     }
 
-    public Employee findEmployeeByEmployeeId(int targetEmployeeId) {
-        for (Employee employee : employeeList) {
-            if (employee.getEmployeeId() == targetEmployeeId) {
+    private Employee findEmployeeById(String employeeId) {
+        for (Employee employee : employees) {
+            if (employee.getEmployeeId().equals(employeeId)) {
                 return employee;
+            }
+        }
+        return null;
+    }
+
+    private Department findDepartmentById(String departmentId) {
+        for (Department department : departments) {
+            if (department.getDepartmentId().equals(departmentId)) {
+                return department;
             }
         }
         return null;
