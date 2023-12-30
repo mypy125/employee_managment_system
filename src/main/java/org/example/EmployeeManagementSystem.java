@@ -1,22 +1,31 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EmployeeManagementSystem {
+//-----------------------------------------------region fill
     private List<Employee> employees;
     private List<Department> departments;
-
+//-----------------------------------------------region construction
     public EmployeeManagementSystem() {
         this.employees = new ArrayList<>();
         this.departments = new ArrayList<>();
     }
-
+//---------------------------------------------------------------region method
     public void addEmployee(Employee employee) {
+        if(!isValidAccount(employee)){
+            System.out.println("заполните все поля аккаунта!");
+        }
         employees.add(employee);
     }
 
     public void addDepartment(Department department) {
+        if(!isValidDepartment(department)){
+            System.out.println("заполните все поля департамента!");
+        }
         departments.add(department);
     }
 
@@ -27,7 +36,7 @@ public class EmployeeManagementSystem {
         if (employee != null && department != null) {
             employee.assignDepartment(department);
         } else {
-            System.out.println("Employee or Department not found.");
+            System.out.println("Сотрудник или отдел не найден.");
         }
     }
 
@@ -39,12 +48,12 @@ public class EmployeeManagementSystem {
             System.out.println("Salary: $" + employee.getSalary());
             Department department = employee.getDepartment();
             if (department != null) {
-                System.out.println("Department: " + department.getDepartmentName());
+                System.out.println("Департамент: " + department.getDepartmentName());
             } else {
-                System.out.println("Department: Not Assigned");
+                System.out.println("Департамент: Не назначен");
             }
         } else {
-            System.out.println("Employee not found with ID: " + employeeId);
+            System.out.println("Сотрудник не найден по ID: " + employeeId);
         }
     }
 
@@ -65,4 +74,13 @@ public class EmployeeManagementSystem {
         }
         return null;
     }
+    public static boolean isValidAccount(Employee employee){
+        return employee.getEmployeeId() != null && employee.getUsername() != null &&
+                employee.getEmployeeName() != null && employee.getPassword() != null;
+    }
+    private boolean isValidDepartment(Department department) {
+        return department.getDepartmentId() != null && department.getDepartmentName() != null;
+    }
+
+
 }
