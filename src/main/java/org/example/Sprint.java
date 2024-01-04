@@ -8,12 +8,14 @@ public class Sprint {
     private String Sprint;
     private LocalDate startDate;
     private LocalDate endDate;
+    private Priority priority;
     //-----------------------------------------------------------region construction
-    public Sprint(String name, String sprint, LocalDate startDate, LocalDate endDate) {
+    public Sprint(String name, String sprint, LocalDate startDate, LocalDate endDate,Priority priority) {
         this.name = name;
         this.Sprint = sprint;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.priority = priority;
     }
 //----------------------------------------------region get and set
     public String getName() {
@@ -32,4 +34,7 @@ public class Sprint {
         return endDate;
     }
 
+    public Priority getPriority() {
+        return priority;
+    }
 }

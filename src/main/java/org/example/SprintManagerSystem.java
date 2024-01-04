@@ -5,7 +5,9 @@ import java.util.List;
 
 public class SprintManagerSystem {
 //-----------------------------------------------region fill
+    private Calendar calendar;
     private List<Sprint> sprintList;
+
 //-----------------------------------------------region construction
     public SprintManagerSystem(){
         this.sprintList = new ArrayList<>();
@@ -23,5 +25,19 @@ public class SprintManagerSystem {
         return null;
     }
 
+    public Sprint getSprintByPriority(Priority priority){
+        for(Sprint sprint : sprintList){
+            if(sprint.getPriority().equals(priority)){
+                return sprint;
+            }
+        }
+        return null;
+    }
+    public void addCalendar(){
+        for(Sprint sprint : sprintList){
+            calendar.addEvent(sprint.getStartDate(),sprint);
+            System.out.println("sprint added Calendar");
+        }
+    }
 
 }
