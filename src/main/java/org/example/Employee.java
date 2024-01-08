@@ -11,8 +11,8 @@ public class Employee extends BaseEmployee {
     private Department department;
 //-------------------------------------------------region construction
 
-    public Employee(String employeeId, String employeeName,String employeeSurname, double salary, String username, String password,Access access) {
-       super(employeeId,employeeName,employeeSurname);
+    public Employee(String employeeName,String employeeSurname, double salary, String username, String password,Access access) {
+       super(employeeName,employeeSurname);
         this.salary = salary;
         this.username = username;
         this.password = password;
@@ -43,7 +43,7 @@ public class Employee extends BaseEmployee {
         if (isValidAccount(employeeId,employeeName,employeeSurname,salary,username,password,access)){
             System.out.println("невалидные данны");
         }
-        return new Employee(employeeId, employeeName,employeeSurname, salary, username, password, access);
+        return new Employee(employeeName,employeeSurname, salary, username, password, access);
     }
 
     public static Employee login(String username, String password, Employee[] employees) {
@@ -65,7 +65,7 @@ public class Employee extends BaseEmployee {
                 salary != 0 && access != null;
     }
     static boolean isValidDepartment(Department department) {
-        return department.getDepartmentId() != null && department.getDepartmentName() != null;
+        return department.getDepartmentId() != 0 && department.getDepartmentName() != null;
     }
 
 }

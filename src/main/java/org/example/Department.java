@@ -2,16 +2,17 @@ package org.example;
 
 public class Department {
 //------------------------------------------region fill
-    private String departmentId;
+    private static int gID;
+    private int departmentId;
     private String departmentName;
 //----------------------------------------------region construction
 
-    public Department(String departmentId, String departmentName) {
-        this.departmentId = departmentId;
+    public Department(String departmentName) {
+        this.departmentId = gID++;
         this.departmentName = departmentName;
     }
 //-----------------------------------------------region get and set
-    public String getDepartmentId() {
+    public int getDepartmentId() {
         return departmentId;
     }
 

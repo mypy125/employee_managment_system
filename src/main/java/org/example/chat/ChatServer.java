@@ -30,9 +30,7 @@ public class ChatServer {
     }
 
     private void handleClient(Socket clientSocket, ObjectOutputStream outputStream) {
-        try (
-                ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream())
-        ) {
+        try (ObjectInputStream inputStream = new ObjectInputStream(clientSocket.getInputStream())) {
             while (true) {
                 ChatMessage message = (ChatMessage) inputStream.readObject();
                 broadcastMessage(message);

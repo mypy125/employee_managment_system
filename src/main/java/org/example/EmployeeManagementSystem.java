@@ -28,7 +28,7 @@ public class EmployeeManagementSystem implements StaffManagementSystem{
         }
         departments.add(department);
     }
-    public void assignEmployeeToDepartment(String employeeId, String departmentId) {
+    public void assignEmployeeToDepartment(int employeeId, int departmentId) {
         Employee employee = findEmployeeById(employeeId);
         Department department = findDepartmentById(departmentId);
 
@@ -38,7 +38,7 @@ public class EmployeeManagementSystem implements StaffManagementSystem{
             System.out.println("Сотрудник или отдел не найден.");
         }
     }
-    public void displayEmployeeInformation(String employeeId) {
+    public void displayEmployeeInformation(int employeeId) {
         Employee employee = findEmployeeById(employeeId);
         if (employee != null) {
             System.out.println("Employee ID: " + employee.getEmployeeId());
@@ -54,17 +54,17 @@ public class EmployeeManagementSystem implements StaffManagementSystem{
             System.out.println("Сотрудник не найден по ID: " + employeeId);
         }
     }
-    private Employee findEmployeeById(String employeeId) {
+    private Employee findEmployeeById(int employeeId) {
         for (Employee employee : employees.values()) {
-            if (employee.getEmployeeId().equals(employeeId)) {
+            if (employee.getEmployeeId() == employeeId) {
                 return employee;
             }
         }
         return null;
     }
-    private Department findDepartmentById(String departmentId) {
+    private Department findDepartmentById(int departmentId) {
         for (Department department : departments) {
-            if (department.getDepartmentId().equals(departmentId)) {
+            if (department.getDepartmentId() == departmentId) {
                 return department;
             }
         }
