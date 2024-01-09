@@ -1,8 +1,10 @@
-package org.example;
+package org.example.employee;
+
+import org.example.Department;
 
 import java.util.Objects;
 
-public class Employee extends BaseEmployee {
+public class EmployeeUser extends BaseEmployee {
 //----------------------------------------------region fill
     private double salary;
     private String username;
@@ -11,12 +13,13 @@ public class Employee extends BaseEmployee {
     private Department department;
 //-------------------------------------------------region construction
 
-    public Employee(String employeeName,String employeeSurname, double salary, String username, String password,Access access) {
-       super(employeeName,employeeSurname);
+    public EmployeeUser(String employeeName, String employeeSurname, String employeeMail, double salary,
+                        String username, String password) {
+       super(employeeName,employeeSurname,employeeMail);
         this.salary = salary;
         this.username = username;
         this.password = password;
-        this.access = access;
+        this.access = Access.SECOND;
     }
 
 //-----------------------------------------------------region get and set
@@ -38,16 +41,16 @@ public class Employee extends BaseEmployee {
 
 //-----------------------------------------------------------------------------------------------region method
 
-    public static Employee registerEmployee(String employeeId, String employeeName,String employeeSurname, double salary,
-                                            String username, String password,Access access) {
-        if (isValidAccount(employeeId,employeeName,employeeSurname,salary,username,password,access)){
+    public static EmployeeUser registerEmployee(String employeeName, String employeeSurname, String employeeMail,
+                                                double salary, String username, String password) {
+        if (isValidAccount(employeeName,employeeSurname,salary,username,password)){
             System.out.println("невалидные данны");
         }
-        return new Employee(employeeName,employeeSurname, salary, username, password, access);
+        return new EmployeeUser(employeeName,employeeSurname,employeeMail, salary, username, password);
     }
 
-    public static Employee login(String username, String password, Employee[] employees) {
-        for (Employee employee : employees) {
+    public static EmployeeUser login(String username, String password, EmployeeUser[] employees) {
+        for (EmployeeUser employee : employees) {
             if (employee.getUsername().equals(username) && employee.authenticate(password)) {
                 return employee;
             }
@@ -59,13 +62,13 @@ public class Employee extends BaseEmployee {
     public boolean authenticate(String enteredPassword) {
         return Objects.equals(password, enteredPassword);
     }
-    public static boolean isValidAccount(String employeeId,String employeeName,String employeeSurname, double salary,
-                                         String username, String password,Access access){
-        return employeeId != null && employeeName != null && username != null && password != null &&
-                salary != 0 && access != null;
+    public static boolean isValidAccount(String employeeName,String employeeSurname, double salary,
+                                         String username, String password){
+        return  employeeName != null && employeeSurname != null && username != null && password != null &&
+                salary != 0 ;
     }
     static boolean isValidDepartment(Department department) {
-        return department.getDepartmentId() != 0 && department.getDepartmentName() != null;
+        return department.getDepartmentName() != null;
     }
 
 }
