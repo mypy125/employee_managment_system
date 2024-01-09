@@ -1,11 +1,14 @@
 package org.example.todoTaskSprint;
 
+import org.example.Calendar;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ToDoList {
 //-----------------------------------------------------------region fill
+    private Calendar calendar;
     private List<Task> tasks;
 //-----------------------------------------------------------region construction
     public ToDoList() {
@@ -33,6 +36,20 @@ public class ToDoList {
         } else {
             System.out.println("В списке дел бэклога спринта нет задач.");
         }
+    }
+    public void addCalendar(){
+        for(Task task : tasks){
+            calendar.addEvent(task.getLocalDate(), task);
+            System.out.println("sprint added Calendar");
+        }
+    }
+    public Task getTaskByPriority(Priority priority){
+        for(Task task : tasks){
+            if(task.getPriority().equals(priority)){
+                return task;
+            }
+        }
+        return null;
     }
 
     private boolean isValidIndex(int index) {
