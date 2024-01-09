@@ -6,13 +6,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ToDoList {
+public class ToDoList{
 //-----------------------------------------------------------region fill
     private Calendar calendar;
     private List<Task> tasks;
 //-----------------------------------------------------------region construction
     public ToDoList() {
         this.tasks = new ArrayList<>();
+        this.calendar = new Calendar<>();
     }
 //-----------------------------------------------------------region method
     public void addTask(String description, Priority priority, LocalDate endDate) {
@@ -39,7 +40,7 @@ public class ToDoList {
     }
     public void addCalendar(){
         for(Task task : tasks){
-            calendar.addEvent(task.getLocalDate(), task);
+            calendar.addEvent(task.getEndDate(),task.getDescription());
             System.out.println("sprint added Calendar");
         }
     }

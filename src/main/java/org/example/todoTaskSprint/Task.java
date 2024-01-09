@@ -29,7 +29,14 @@ public class Task {
         return priority;
     }
 
-    public LocalDate getLocalDate() {
+    public LocalDate getEndDate() {
         return endDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+    public boolean isValidTask(Task task){
+        return description != null && priority != null && endDate != null;
     }
 }
