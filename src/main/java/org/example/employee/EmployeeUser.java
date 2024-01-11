@@ -12,7 +12,7 @@ public class EmployeeUser extends BaseEmployee {
     private Access access;
     private Department department;
 //-------------------------------------------------region construction
-
+    public EmployeeUser(){}
     public EmployeeUser(String employeeName, String employeeSurname, String employeeMail, double salary,
                         String username, String password) {
        super(employeeName,employeeSurname,employeeMail);

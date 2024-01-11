@@ -36,7 +36,4 @@ public class Task {
     public String getDescription() {
         return description;
     }
-    public boolean isValidTask(Task task){
-        return description != null && priority != null && endDate != null;
-    }
 }

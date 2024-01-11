@@ -13,7 +13,7 @@ public class ToDoList{
 //-----------------------------------------------------------region construction
     public ToDoList() {
         this.tasks = new ArrayList<>();
-        this.calendar = new Calendar<>();
+        this.calendar = new Calendar();
     }
 //-----------------------------------------------------------region method
     public void addTask(String description, Priority priority, LocalDate endDate) {

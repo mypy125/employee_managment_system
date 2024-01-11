@@ -12,6 +12,7 @@ public class BaseEmployee {
     private Department department;
     private Access access;
 //--------------------------------------------------------region construction
+    public BaseEmployee(){}
     public BaseEmployee(String employeeName, String employeeSurname,String employeeMail) {
         this.employeeName = employeeName;
         this.employeeSurname = employeeSurname;

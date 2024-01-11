@@ -1,17 +1,19 @@
 package org.example;
 
-import org.example.employee.AdminUser;
-import org.example.employee.BaseEmployee;
-import org.example.employee.EmployeeManagementSystem;
-import org.example.employee.EmployeeUser;
+import org.example.employee.*;
+import org.example.employee.userFactory.EmployeeType;
+import org.example.employee.userFactory.UserFactory;
 import org.example.todoTaskSprint.Priority;
-import org.example.todoTaskSprint.Task;
 import org.example.todoTaskSprint.ToDoList;
 
 import java.time.LocalDate;
 
 public class Program {
     public static void main(String[] args) {
+//        BaseEmployee employee1 = new UserFactory().getEmployee(EmployeeType.ADMIN);
+//        BaseEmployee employee2 = new UserFactory().getEmployee(EmployeeType.USER);
+//        BaseEmployee employee3 = new UserFactory().getEmployee(EmployeeType.BASE);
+
         AdminUser user = new AdminUser("gor","mkhitaryan","gor@gmail.com");
         BaseEmployee user2 = new BaseEmployee("sveta","isakova","svis@gmail.com");
         EmployeeUser user3 = new EmployeeUser("sasha","emelyanov","vasil@mail.ru",1500,"SM","1234");
@@ -31,7 +33,7 @@ public class Program {
 
 
         ToDoList list = new ToDoList();
-        list.addTask("create searching system...", Priority.HIGH, LocalDate.now());
+        list.addTask("create searching system...", Priority.MEDIUM, LocalDate.now());
         list.addTask("create database system...", Priority.HIGH, LocalDate.now());
         list.viewTasks();
         list.addCalendar();

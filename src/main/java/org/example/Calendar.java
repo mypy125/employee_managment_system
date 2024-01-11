@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Calendar<T extends Task> {
+public class Calendar{
 //------------------------------------------region fill
     private Map<LocalDate, String> events;
 //------------------------------------------region construction
