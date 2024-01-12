@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.employee.*;
 import org.example.employee.userFactory.EmployeeType;
+//import org.example.employee.userFactory.UserFactory;
 import org.example.employee.userFactory.UserFactory;
 import org.example.todoTaskSprint.Priority;
 import org.example.todoTaskSprint.ToDoList;
@@ -10,13 +11,9 @@ import java.time.LocalDate;
 
 public class Program {
     public static void main(String[] args) {
-//        BaseEmployee employee1 = new UserFactory().getEmployee(EmployeeType.ADMIN);
-//        BaseEmployee employee2 = new UserFactory().getEmployee(EmployeeType.USER);
-//        BaseEmployee employee3 = new UserFactory().getEmployee(EmployeeType.BASE);
-
-        AdminUser user = new AdminUser("gor","mkhitaryan","gor@gmail.com");
-        BaseEmployee user2 = new BaseEmployee("sveta","isakova","svis@gmail.com");
-        EmployeeUser user3 = new EmployeeUser("sasha","emelyanov","vasil@mail.ru",1500,"SM","1234");
+        BaseEmployee user = AdminUser.getAdminUser("gor","mkhitaryan","gor@gmail.com");
+        BaseEmployee user2 = BaseEmployee.getBaseEmployee("sveta","isakova","svis@gmail.com");
+        BaseEmployee user3 = EmployeeUser.getEmployeeUser("sasha","emelyanov","vasil@mail.ru",1500,"SM","1234");
 
         Department department1 = new Department("developer");
         Department department2 = new Department("QA");
@@ -41,8 +38,11 @@ public class Program {
         Calendar calendar = new Calendar();
         calendar.viewCalendar(LocalDate.now());
 
-
-
+//------------------------------------------------fabric method
+        UserFactory users = new UserFactory();
+        users.getEmployee(EmployeeType.ADMIN);
+        users.getEmployee(EmployeeType.BASE);
+        users.getEmployee(EmployeeType.USER);
 
     }
 }

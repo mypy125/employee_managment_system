@@ -2,6 +2,8 @@ package org.example.employee;
 
 import org.example.Department;
 import org.example.StaffManagementSystem;
+import org.example.employee.userFactory.CreatorEmployee;
+import org.example.employee.userFactory.EmployeeType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,6 +75,15 @@ public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffMa
         }
         return null;
     }
+
+    public static EmployeeUser login(String username, String password, EmployeeUser[] employees) {
+        for (EmployeeUser employee : employees) {
+            if (employee.getUsername().equals(username) && employee.authenticate(password)) {
+                return employee;
+            }
+        }
+        return null;
+    }
 //---------------------------------------------------------------analytic method
     @Override
     public int getEmployeeCount() {
@@ -97,6 +108,7 @@ public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffMa
         System.out.println("Количество сотрудников: " + getEmployeeCount());
         System.out.println("Средняя заработная плата: " + getAverageSalary());
     }
+
 
 
 }

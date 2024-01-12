@@ -12,8 +12,7 @@ public class EmployeeUser extends BaseEmployee {
     private Access access;
     private Department department;
 //-------------------------------------------------region construction
-    public EmployeeUser(){}
-    public EmployeeUser(String employeeName, String employeeSurname, String employeeMail, double salary,
+    private EmployeeUser(String employeeName, String employeeSurname, String employeeMail, double salary,
                         String username, String password) {
        super(employeeName,employeeSurname,employeeMail);
         this.salary = salary;
@@ -21,6 +20,7 @@ public class EmployeeUser extends BaseEmployee {
         this.password = password;
         this.access = Access.SECOND;
     }
+    public EmployeeUser(){}
 
 //-----------------------------------------------------region get and set
 
@@ -41,14 +41,15 @@ public class EmployeeUser extends BaseEmployee {
 
 //-----------------------------------------------------------------------------------------------region method
 
-    public static EmployeeUser registerEmployee(String employeeName, String employeeSurname, String employeeMail,
-                                                double salary, String username, String password) {
-        if (isValidAccount(employeeName,employeeSurname,salary,username,password)){
-            System.out.println("невалидные данны");
+    public static EmployeeUser getEmployeeUser(String employeeName, String employeeSurname, String employeeMail, double salary,
+                                               String username, String password){
+        if(!isValidAccount(employeeName,employeeSurname, salary, username, password)){
+            throw new IllegalStateException("NoValid Data: "+ employeeName + employeeSurname + salary + username + password);
         }
-        return new EmployeeUser(employeeName,employeeSurname,employeeMail, salary, username, password);
+        return new EmployeeUser(employeeName,employeeSurname,employeeMail,salary,username,password);
     }
 
+//------------------------------------------------------------------------------------------validation method
     public static EmployeeUser login(String username, String password, EmployeeUser[] employees) {
         for (EmployeeUser employee : employees) {
             if (employee.getUsername().equals(username) && employee.authenticate(password)) {
@@ -57,8 +58,6 @@ public class EmployeeUser extends BaseEmployee {
         }
         return null;
     }
-//------------------------------------------------------------------------------------------validation method
-
     public boolean authenticate(String enteredPassword) {
         return Objects.equals(password, enteredPassword);
     }

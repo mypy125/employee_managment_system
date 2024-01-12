@@ -12,7 +12,6 @@ public class BaseEmployee {
     private Department department;
     private Access access;
 //--------------------------------------------------------region construction
-    public BaseEmployee(){}
     public BaseEmployee(String employeeName, String employeeSurname,String employeeMail) {
         this.employeeName = employeeName;
         this.employeeSurname = employeeSurname;
@@ -20,7 +19,11 @@ public class BaseEmployee {
         this.access = Access.FIRST;
         this.employeeId = gID++;
     }
+    public BaseEmployee(){}
 //------------------------------------------------region get and set
+    public static BaseEmployee getBaseEmployee(String employeeName, String employeeSurname,String employeeMail){
+        return new BaseEmployee(employeeName,employeeSurname,employeeMail);
+    }
     public int getEmployeeId() {
         return employeeId;
     }
