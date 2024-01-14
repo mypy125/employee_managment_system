@@ -7,14 +7,11 @@ import org.example.employee.userFactory.EmployeeType;
 import org.example.productBacklog.BacklogItem;
 import org.example.productBacklog.ProductBacklog;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.example.employee.EmployeeUser.*;
 
-public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffManagementSystem {
+public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffManagementSystem, LoginUser{
 //-----------------------------------------------region fill
     private Map<String, T> employees;
     private List<Department> departments;
@@ -37,6 +34,7 @@ public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffMa
         }
         departments.add(department);
     }
+//---------------------------------------------------------------------region employee assign system
     public void assignEmployeeToDepartment(String employeeName, String departmentName) {
         T employee = findEmployeeByName(employeeName);
         Department department = findDepartmentByName(departmentName);
@@ -47,19 +45,19 @@ public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffMa
             System.out.println("Сотрудник или отдел не найден.");
         }
     }
-    public void assignEmployeeToProject(String employeeName, String itemName){
+    public void assignEmployeeToProject(String employeeName, String itemName) {
         T employee = findEmployeeByName(employeeName);
         BacklogItem product = findBacklogItemsByName(itemName);
-        if(employee != null && product != null){
+        if (employee != null && product != null) {
             employee.assignToProject(product);
         }
-
     }
+//---------------------------------------------------------end region employee assign system
     public void displayEmployeeInformation(String employeeName) {
         T employee = findEmployeeByName(employeeName);
         if (employee != null) {
-            System.out.println("Employee ID: " + employee.getEmployeeId());
             System.out.println("Employee Name: " + employee.getEmployeeName());
+            System.out.println("Employee Email: " + employee.getEmployeeMail());
             System.out.println("Salary: $" + employee.getSalary());
             Department department = employee.getDepartment();
             if (department != null) {
@@ -71,6 +69,7 @@ public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffMa
             System.out.println("Сотрудник не найден по ID: " + employeeName);
         }
     }
+//----------------------------------------------------------find employee,department,backlog byName
     private T findEmployeeByName(String employeeName) {
         for (T employee : employees.values()) {
             if (employee.getEmployeeName().equals(employeeName)) {
@@ -95,14 +94,19 @@ public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffMa
         }
         return null;
     }
-    public static EmployeeUser login(String username, String password, EmployeeUser[] employees) {
-        for (EmployeeUser employee : employees) {
+
+//---------------------------------------------------------------------login system
+    @Override
+    public BaseEmployee login(String username, String password) {
+        for (BaseEmployee employee : employees.values()) {
             if (employee.getUsername().equals(username) && employee.authenticate(password)) {
+                System.out.println("employee login");
                 return employee;
             }
         }
         return null;
     }
+
 //---------------------------------------------------------------analytic method
     @Override
     public int getEmployeeCount() {
@@ -127,6 +131,5 @@ public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffMa
         System.out.println("Количество сотрудников: " + getEmployeeCount());
         System.out.println("Средняя заработная плата: " + getAverageSalary());
     }
-
 
 }

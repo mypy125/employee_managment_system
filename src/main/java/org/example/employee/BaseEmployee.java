@@ -6,30 +6,23 @@ import org.example.productBacklog.ProductBacklog;
 
 public class BaseEmployee {
 //------------------------------------------region fill
-    private static int gID;
-    private int employeeId;
     private String employeeName;
     private String employeeSurname;
     private String employeeMail;
     private Access access;
     private Department department;
     private BacklogItem backlogItem;
-
 //--------------------------------------------------------region construction
     public BaseEmployee(String employeeName, String employeeSurname,String employeeMail) {
         this.employeeName = employeeName;
         this.employeeSurname = employeeSurname;
         this.employeeMail = employeeMail;
         this.access = Access.FIRST;
-        this.employeeId = gID++;
     }
     public BaseEmployee(){}
 //------------------------------------------------region get and set
     public static BaseEmployee getBaseEmployee(String employeeName, String employeeSurname,String employeeMail){
         return new BaseEmployee(employeeName,employeeSurname,employeeMail);
-    }
-    public int getEmployeeId() {
-        return employeeId;
     }
 
     public String getEmployeeName() {
@@ -51,9 +44,7 @@ public class BaseEmployee {
     public void assignDepartment(Department department) {
         this.department = department;
     }
-    public void assignToProject(BacklogItem backlogItem){
-        this.backlogItem = backlogItem;
-    }
+
     public Department getDepartment() {
         return department;
     }
@@ -64,5 +55,16 @@ public class BaseEmployee {
 
     public String getDepartmentName() {
         return null;
+    }
+    public void assignToProject(BacklogItem backlogItem){
+        this.backlogItem = backlogItem;
+    }
+
+    public Object getUsername() {
+        return null;
+    }
+
+    public boolean authenticate(String password) {
+        return false;
     }
 }

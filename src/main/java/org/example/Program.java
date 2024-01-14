@@ -4,6 +4,7 @@ import org.example.employee.*;
 import org.example.employee.userFactory.EmployeeType;
 //import org.example.employee.userFactory.UserFactory;
 import org.example.employee.userFactory.UserFactory;
+import org.example.productBacklog.ProductBacklog;
 import org.example.todoTaskSprint.Priority;
 import org.example.todoTaskSprint.ToDoList;
 
@@ -18,6 +19,8 @@ public class Program {
         Department department1 = new Department("developer");
         Department department2 = new Department("QA");
 
+        ProductBacklog productBacklog = new ProductBacklog("product1","add new functional for sales",LocalDate.MIN,LocalDate.MAX);
+
         EmployeeManagementSystem ems = new EmployeeManagementSystem();
         ems.addDepartment(department1);
         ems.addDepartment(department2);
@@ -27,6 +30,8 @@ public class Program {
         ems.assignEmployeeToDepartment("sasha","developer");
         ems.assignEmployeeToDepartment("sveta","QA");
         ems.generateBasicReport();
+        ems.assignEmployeeToProject("gor","product1");
+        //ems.login("SM","1234");
 
 
         ToDoList list = new ToDoList();
@@ -37,6 +42,7 @@ public class Program {
 
         Calendar calendar = new Calendar();
         calendar.viewCalendar(LocalDate.now());
+
 
 //------------------------------------------------fabric method
         UserFactory users = new UserFactory();

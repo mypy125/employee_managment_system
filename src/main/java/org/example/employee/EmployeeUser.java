@@ -1,6 +1,7 @@
 package org.example.employee;
 
 import org.example.Department;
+import org.example.productBacklog.BacklogItem;
 
 import java.util.Objects;
 
@@ -10,7 +11,7 @@ public class EmployeeUser extends BaseEmployee {
     private String username;
     private String password;
     private Access access;
-    private Department department;
+
 //-------------------------------------------------region construction
     private EmployeeUser(String employeeName, String employeeSurname, String employeeMail, double salary,
                         String username, String password) {
@@ -34,10 +35,6 @@ public class EmployeeUser extends BaseEmployee {
         return salary;
     }
     public Access getAccess() {return access;}
-    public Department getDepartment() {return department;}
-    public void assignDepartment(Department department) {
-        this.department = department;
-    }
 
 //-----------------------------------------------------------------------------------------------region method
 
@@ -50,14 +47,6 @@ public class EmployeeUser extends BaseEmployee {
     }
 
 //------------------------------------------------------------------------------------------validation method
-    public static EmployeeUser login(String username, String password, EmployeeUser[] employees) {
-        for (EmployeeUser employee : employees) {
-            if (employee.getUsername().equals(username) && employee.authenticate(password)) {
-                return employee;
-            }
-        }
-        return null;
-    }
     public boolean authenticate(String enteredPassword) {
         return Objects.equals(password, enteredPassword);
     }
@@ -69,5 +58,4 @@ public class EmployeeUser extends BaseEmployee {
     static boolean isValidDepartment(Department department) {
         return department.getDepartmentName() != null;
     }
-
 }
