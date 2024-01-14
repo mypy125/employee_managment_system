@@ -4,6 +4,8 @@ import org.example.Department;
 import org.example.StaffManagementSystem;
 import org.example.employee.userFactory.CreatorEmployee;
 import org.example.employee.userFactory.EmployeeType;
+import org.example.productBacklog.BacklogItem;
+import org.example.productBacklog.ProductBacklog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,11 +18,13 @@ public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffMa
 //-----------------------------------------------region fill
     private Map<String, T> employees;
     private List<Department> departments;
+    private ProductBacklog productBacklogs;
 //-----------------------------------------------region construction
 
     public EmployeeManagementSystem() {
         this.employees = new HashMap<>();
         this.departments = new ArrayList<>();
+        this.productBacklogs = new ProductBacklog();
     }
 //---------------------------------------------------------------region method
 
@@ -42,6 +46,14 @@ public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffMa
         } else {
             System.out.println("Сотрудник или отдел не найден.");
         }
+    }
+    public void assignEmployeeToProject(String employeeName, String itemName){
+        T employee = findEmployeeByName(employeeName);
+        BacklogItem product = findBacklogItemsByName(itemName);
+        if(employee != null && product != null){
+            employee.assignToProject(product);
+        }
+
     }
     public void displayEmployeeInformation(String employeeName) {
         T employee = findEmployeeByName(employeeName);
@@ -75,7 +87,14 @@ public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffMa
         }
         return null;
     }
-
+    private BacklogItem findBacklogItemsByName(String itemName){
+        for(BacklogItem backlogItem : productBacklogs.getBacklogItems()){
+            if (backlogItem.getItemName().equals(itemName)){
+                return backlogItem;
+            }
+        }
+        return null;
+    }
     public static EmployeeUser login(String username, String password, EmployeeUser[] employees) {
         for (EmployeeUser employee : employees) {
             if (employee.getUsername().equals(username) && employee.authenticate(password)) {
@@ -108,7 +127,6 @@ public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffMa
         System.out.println("Количество сотрудников: " + getEmployeeCount());
         System.out.println("Средняя заработная плата: " + getAverageSalary());
     }
-
 
 
 }

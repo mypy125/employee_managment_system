@@ -1,6 +1,8 @@
 package org.example.employee;
 
 import org.example.Department;
+import org.example.productBacklog.BacklogItem;
+import org.example.productBacklog.ProductBacklog;
 
 public class BaseEmployee {
 //------------------------------------------region fill
@@ -9,8 +11,10 @@ public class BaseEmployee {
     private String employeeName;
     private String employeeSurname;
     private String employeeMail;
-    private Department department;
     private Access access;
+    private Department department;
+    private BacklogItem backlogItem;
+
 //--------------------------------------------------------region construction
     public BaseEmployee(String employeeName, String employeeSurname,String employeeMail) {
         this.employeeName = employeeName;
@@ -47,7 +51,9 @@ public class BaseEmployee {
     public void assignDepartment(Department department) {
         this.department = department;
     }
-
+    public void assignToProject(BacklogItem backlogItem){
+        this.backlogItem = backlogItem;
+    }
     public Department getDepartment() {
         return department;
     }

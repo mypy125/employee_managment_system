@@ -2,13 +2,18 @@ package org.example.productBacklog;
 
 import org.example.productBacklog.BacklogItem;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductBacklog {
+public class ProductBacklog extends BacklogItem{
     private List<BacklogItem> backlogItems;
 
-    public ProductBacklog() {
+    public ProductBacklog(){
+        this.backlogItems =  new ArrayList<>();
+    }
+    public ProductBacklog(String itemName, String description, LocalDate startDate, LocalDate endDate) {
+        super(itemName,description, startDate,endDate);
         this.backlogItems = new ArrayList<>();
     }
 
@@ -19,4 +24,5 @@ public class ProductBacklog {
     public List<BacklogItem> getBacklogItems() {
         return backlogItems;
     }
+
 }
