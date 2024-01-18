@@ -1,4 +1,4 @@
-package org.example.productBacklog;
+package org.example.model.productBacklog;
 
 import java.time.LocalDate;
 
@@ -26,5 +26,23 @@ public class BacklogItem {
 
     public String getItemName() {
         return itemName;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    @Override
+    public String toString() {
+        return "BacklogItem{" +
+                "itemName='" + itemName + '\'' +
+                ", description='" + description + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                '}';
     }
 }

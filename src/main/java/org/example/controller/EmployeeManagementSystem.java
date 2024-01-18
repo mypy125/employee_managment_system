@@ -1,17 +1,16 @@
-package org.example.employee;
+package org.example.controller;
 
-import org.example.Department;
+import org.example.model.department.Department;
 import org.example.StaffManagementSystem;
-import org.example.employee.userFactory.CreatorEmployee;
-import org.example.employee.userFactory.EmployeeType;
-import org.example.productBacklog.BacklogItem;
-import org.example.productBacklog.ProductBacklog;
+import org.example.model.LoginUser;
+import org.example.model.employee.BaseEmployee;
+import org.example.model.employee.EmployeeUser;
+import org.example.model.productBacklog.BacklogItem;
+import org.example.model.productBacklog.ProductBacklog;
 
 import java.util.*;
 
-import static org.example.employee.EmployeeUser.*;
-
-public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffManagementSystem, LoginUser{
+public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffManagementSystem, LoginUser {
 //-----------------------------------------------region fill
     private Map<String, T> employees;
     private List<Department> departments;
@@ -21,7 +20,7 @@ public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffMa
     public EmployeeManagementSystem() {
         this.employees = new HashMap<>();
         this.departments = new ArrayList<>();
-        this.productBacklogs = new ProductBacklog();
+        this.productBacklogs = new ProductBacklog(new BacklogItem());
     }
 //---------------------------------------------------------------region method
 
@@ -29,7 +28,7 @@ public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffMa
         employees.put(employee.getEmployeeName(),employee);
     }
     public void addDepartment(Department department) {
-        if(!isValidDepartment(department)){
+        if(!EmployeeUser.isValidDepartment(department)){
             System.out.println("заполните все поля департамента!");
         }
         departments.add(department);

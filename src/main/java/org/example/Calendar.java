@@ -1,13 +1,7 @@
 package org.example;
 
-import org.example.todoTaskSprint.Priority;
-import org.example.todoTaskSprint.Task;
-import org.example.todoTaskSprint.ToDoList;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Calendar{

@@ -1,8 +1,8 @@
-package org.example.employee;
+package org.example.model.employee;
 
-import org.example.Department;
-import org.example.productBacklog.BacklogItem;
-import org.example.productBacklog.ProductBacklog;
+import org.example.model.department.Department;
+import org.example.model.Access;
+import org.example.model.productBacklog.BacklogItem;
 
 public class BaseEmployee {
 //------------------------------------------region fill

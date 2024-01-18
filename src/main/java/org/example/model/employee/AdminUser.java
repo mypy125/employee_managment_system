@@ -1,6 +1,8 @@
-package org.example.employee;
+package org.example.model.employee;
 
-public class AdminUser extends BaseEmployee{
+import org.example.model.Access;
+
+public class AdminUser extends BaseEmployee {
 //---------------------------------region fill
     private Access access;
 //------------------------------------------------------------region construction

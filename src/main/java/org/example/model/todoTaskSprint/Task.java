@@ -1,4 +1,4 @@
-package org.example.todoTaskSprint;
+package org.example.model.todoTaskSprint;
 
 import java.time.LocalDate;
 

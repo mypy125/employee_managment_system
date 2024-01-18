@@ -1,4 +1,4 @@
-package org.example;
+package org.example.model.department;
 
 public class Department {
 //------------------------------------------region fill

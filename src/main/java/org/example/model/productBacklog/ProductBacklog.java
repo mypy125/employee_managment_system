@@ -1,15 +1,16 @@
-package org.example.productBacklog;
+package org.example.model.productBacklog;
 
-import org.example.productBacklog.BacklogItem;
+import org.example.model.productBacklog.BacklogItem;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductBacklog extends BacklogItem{
+public class ProductBacklog extends BacklogItem {
     private List<BacklogItem> backlogItems;
-
-    public ProductBacklog(){
+    private BacklogItem backlogItem;
+    public ProductBacklog(BacklogItem backlogItem){
+        this.backlogItem = backlogItem;
         this.backlogItems =  new ArrayList<>();
     }
     public ProductBacklog(String itemName, String description, LocalDate startDate, LocalDate endDate) {

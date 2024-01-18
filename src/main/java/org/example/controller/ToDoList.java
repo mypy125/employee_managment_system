@@ -1,6 +1,8 @@
-package org.example.todoTaskSprint;
+package org.example.controller;
 
 import org.example.Calendar;
+import org.example.model.todoTaskSprint.Priority;
+import org.example.model.todoTaskSprint.Task;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -10,6 +12,7 @@ public class ToDoList{
 //-----------------------------------------------------------region fill
     private Calendar calendar;
     private List<Task> tasks;
+    //private Task task;
 //-----------------------------------------------------------region construction
     public ToDoList() {
         this.tasks = new ArrayList<>();

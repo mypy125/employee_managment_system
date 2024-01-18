@@ -1,8 +1,9 @@
-package org.example.employee.userFactory;
+package org.example.model.employee.userFactory;
 
-import org.example.employee.AdminUser;
-import org.example.employee.BaseEmployee;
-import org.example.employee.EmployeeUser;
+import org.example.model.EmployeeType;
+import org.example.model.employee.EmployeeUser;
+import org.example.model.employee.AdminUser;
+import org.example.model.employee.BaseEmployee;
 
 public class UserFactory extends CreatorEmployee{
     @Override

@@ -1,12 +1,15 @@
 package org.example;
 
-import org.example.employee.*;
-import org.example.employee.userFactory.EmployeeType;
-//import org.example.employee.userFactory.UserFactory;
-import org.example.employee.userFactory.UserFactory;
-import org.example.productBacklog.ProductBacklog;
-import org.example.todoTaskSprint.Priority;
-import org.example.todoTaskSprint.ToDoList;
+import org.example.model.department.Department;
+import org.example.model.employee.AdminUser;
+import org.example.model.employee.BaseEmployee;
+import org.example.controller.EmployeeManagementSystem;
+import org.example.model.employee.EmployeeUser;
+import org.example.model.EmployeeType;
+import org.example.model.employee.userFactory.UserFactory;
+import org.example.model.productBacklog.ProductBacklog;
+import org.example.model.todoTaskSprint.Priority;
+import org.example.controller.ToDoList;
 
 import java.time.LocalDate;
 
@@ -20,6 +23,7 @@ public class Program {
         Department department2 = new Department("QA");
 
         ProductBacklog productBacklog = new ProductBacklog("product1","add new functional for sales",LocalDate.MIN,LocalDate.MAX);
+        productBacklog.addItem(productBacklog);
 
         EmployeeManagementSystem ems = new EmployeeManagementSystem();
         ems.addDepartment(department1);

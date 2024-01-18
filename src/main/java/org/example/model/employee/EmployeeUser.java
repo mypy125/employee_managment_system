@@ -1,7 +1,7 @@
-package org.example.employee;
+package org.example.model.employee;
 
-import org.example.Department;
-import org.example.productBacklog.BacklogItem;
+import org.example.model.department.Department;
+import org.example.model.Access;
 
 import java.util.Objects;
 
@@ -55,7 +55,7 @@ public class EmployeeUser extends BaseEmployee {
         return  employeeName != null && employeeSurname != null && username != null && password != null &&
                 salary != 0 ;
     }
-    static boolean isValidDepartment(Department department) {
+    public static boolean isValidDepartment(Department department) {
         return department.getDepartmentName() != null;
     }
 }

@@ -1,4 +1,4 @@
-package org.example.employee;
+package org.example.model;
 
 public enum Access {
     FIRST, SECOND, THIRD;

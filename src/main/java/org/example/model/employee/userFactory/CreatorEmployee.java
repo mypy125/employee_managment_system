@@ -1,7 +1,7 @@
-package org.example.employee.userFactory;
+package org.example.model.employee.userFactory;
 
-import org.example.employee.BaseEmployee;
-import org.example.employee.userFactory.EmployeeType;
+import org.example.model.employee.BaseEmployee;
+import org.example.model.EmployeeType;
 
 public abstract class CreatorEmployee{
     public BaseEmployee getEmployee(EmployeeType type){
