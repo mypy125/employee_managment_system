@@ -5,32 +5,22 @@ import org.example.model.Access;
 
 import java.util.Objects;
 
-public class EmployeeUser extends BaseEmployee {
+public class EmployeeUser extends EntityEmployee {
 //----------------------------------------------region fill
     private double salary;
-    private String username;
-    private String password;
     private Access access;
 
 //-------------------------------------------------region construction
-    private EmployeeUser(String employeeName, String employeeSurname, String employeeMail, double salary,
-                        String username, String password) {
-       super(employeeName,employeeSurname,employeeMail);
+
+    public EmployeeUser(String name, String surname, String mail, String password, double salary) {
+        super(name, surname, mail, password);
         this.salary = salary;
-        this.username = username;
-        this.password = password;
-        this.access = Access.SECOND;
+        this.access = Access.THIRD;
     }
+
     public EmployeeUser(){}
 
 //-----------------------------------------------------region get and set
-
-    public String getUsername() {
-        return username;
-    }
-    public String getPassword() {
-        return password;
-    }
     public double getSalary() {
         return salary;
     }
@@ -38,22 +28,20 @@ public class EmployeeUser extends BaseEmployee {
 
 //-----------------------------------------------------------------------------------------------region method
 
-    public static EmployeeUser getEmployeeUser(String employeeName, String employeeSurname, String employeeMail, double salary,
-                                               String username, String password){
-        if(!isValidAccount(employeeName,employeeSurname, salary, username, password)){
-            throw new IllegalStateException("NoValid Data: "+ employeeName + employeeSurname + salary + username + password);
+    public static EmployeeUser getEmployeeUser(String name, String surname, String mail, String password, double salary){
+        if(!isValidAccount(name,surname, mail, password,salary)){
+            throw new IllegalStateException("NoValid Data: "+ name + surname + mail + password + salary);
         }
-        return new EmployeeUser(employeeName,employeeSurname,employeeMail,salary,username,password);
+        return new EmployeeUser(name,surname, mail, password,salary);
     }
 
 //------------------------------------------------------------------------------------------validation method
-    public boolean authenticate(String enteredPassword) {
-        return Objects.equals(password, enteredPassword);
+
+    public static boolean isValidAccount(String name, String surname, String mail, String password, double salary){
+        return  name != null && surname != null && mail != null && password != null && salary != 0 ;
     }
-    public static boolean isValidAccount(String employeeName,String employeeSurname, double salary,
-                                         String username, String password){
-        return  employeeName != null && employeeSurname != null && username != null && password != null &&
-                salary != 0 ;
+    public boolean authenticate(String enteredPassword) {
+        return Objects.equals(getPassword(), enteredPassword);
     }
     public static boolean isValidDepartment(Department department) {
         return department.getDepartmentName() != null;

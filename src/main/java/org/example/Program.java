@@ -2,7 +2,7 @@ package org.example;
 
 import org.example.model.department.Department;
 import org.example.model.employee.AdminUser;
-import org.example.model.employee.BaseEmployee;
+import org.example.model.employee.EntityEmployee;
 import org.example.controller.EmployeeManagementSystem;
 import org.example.model.employee.EmployeeUser;
 import org.example.model.EmployeeType;
@@ -15,9 +15,9 @@ import java.time.LocalDate;
 
 public class Program {
     public static void main(String[] args) {
-        BaseEmployee user = AdminUser.getAdminUser("gor","mkhitaryan","gor@gmail.com");
-        BaseEmployee user2 = BaseEmployee.getBaseEmployee("sveta","isakova","svis@gmail.com");
-        BaseEmployee user3 = EmployeeUser.getEmployeeUser("sasha","emelyanov","vasil@mail.ru",1500,"SM","1234");
+        EntityEmployee user = AdminUser.getAdminUser("gor","mkhitaryan","gor@gmail.com","1234");
+        EntityEmployee user2 = EntityEmployee.getBaseEmployee("sveta","isakova","svis@gmail.com","1234");
+        EntityEmployee user3 = EmployeeUser.getEmployeeUser("sasha","emelyanov","vasil@mail.ru","1234",1500);
 
         Department department1 = new Department("developer");
         Department department2 = new Department("QA");
@@ -35,7 +35,7 @@ public class Program {
         ems.assignEmployeeToDepartment("sveta","QA");
         ems.generateBasicReport();
         ems.assignEmployeeToProject("gor","product1");
-        //ems.login("SM","1234");
+        ems.login("gor","1234");
 
 
         ToDoList list = new ToDoList();

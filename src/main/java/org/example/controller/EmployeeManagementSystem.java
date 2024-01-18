@@ -3,14 +3,14 @@ package org.example.controller;
 import org.example.model.department.Department;
 import org.example.StaffManagementSystem;
 import org.example.model.LoginUser;
-import org.example.model.employee.BaseEmployee;
+import org.example.model.employee.EntityEmployee;
 import org.example.model.employee.EmployeeUser;
 import org.example.model.productBacklog.BacklogItem;
 import org.example.model.productBacklog.ProductBacklog;
 
 import java.util.*;
 
-public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffManagementSystem, LoginUser {
+public class EmployeeManagementSystem<T extends EntityEmployee> implements StaffManagementSystem, LoginUser {
 //-----------------------------------------------region fill
     private Map<String, T> employees;
     private List<Department> departments;
@@ -25,7 +25,7 @@ public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffMa
 //---------------------------------------------------------------region method
 
     public void addEmployee(T employee) {
-        employees.put(employee.getEmployeeName(),employee);
+        employees.put(employee.getName(),employee);
     }
     public void addDepartment(Department department) {
         if(!EmployeeUser.isValidDepartment(department)){
@@ -55,8 +55,8 @@ public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffMa
     public void displayEmployeeInformation(String employeeName) {
         T employee = findEmployeeByName(employeeName);
         if (employee != null) {
-            System.out.println("Employee Name: " + employee.getEmployeeName());
-            System.out.println("Employee Email: " + employee.getEmployeeMail());
+            System.out.println("Employee Name: " + employee.getName());
+            System.out.println("Employee Email: " + employee.getMail());
             System.out.println("Salary: $" + employee.getSalary());
             Department department = employee.getDepartment();
             if (department != null) {
@@ -71,7 +71,7 @@ public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffMa
 //----------------------------------------------------------find employee,department,backlog byName
     private T findEmployeeByName(String employeeName) {
         for (T employee : employees.values()) {
-            if (employee.getEmployeeName().equals(employeeName)) {
+            if (employee.getName().equals(employeeName)) {
                 return employee;
             }
         }
@@ -96,15 +96,16 @@ public class EmployeeManagementSystem<T extends BaseEmployee> implements StaffMa
 
 //---------------------------------------------------------------------login system
     @Override
-    public BaseEmployee login(String username, String password) {
-        for (BaseEmployee employee : employees.values()) {
-            if (employee.getUsername().equals(username) && employee.authenticate(password)) {
+    public T login(String username, String password) {
+        for (T employee : employees.values()) {
+            if (employee.getName().equals(username) && employee.authenticate(password)) {
                 System.out.println("employee login");
                 return employee;
             }
         }
         return null;
     }
+
 
 //---------------------------------------------------------------analytic method
     @Override

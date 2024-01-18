@@ -4,37 +4,45 @@ import org.example.model.department.Department;
 import org.example.model.Access;
 import org.example.model.productBacklog.BacklogItem;
 
-public class BaseEmployee {
+import java.util.Objects;
+
+public class EntityEmployee {
 //------------------------------------------region fill
-    private String employeeName;
-    private String employeeSurname;
-    private String employeeMail;
+    private String name;
+    private String surname;
+    private String mail;
+    private String password;
     private Access access;
     private Department department;
     private BacklogItem backlogItem;
+
 //--------------------------------------------------------region construction
-    public BaseEmployee(String employeeName, String employeeSurname,String employeeMail) {
-        this.employeeName = employeeName;
-        this.employeeSurname = employeeSurname;
-        this.employeeMail = employeeMail;
+    public EntityEmployee(String name, String surname, String mail, String password) {
+        this.name = name;
+        this.surname = surname;
+        this.mail = mail;
+        this.password = password;
         this.access = Access.FIRST;
     }
-    public BaseEmployee(){}
+    public EntityEmployee(){}
 //------------------------------------------------region get and set
-    public static BaseEmployee getBaseEmployee(String employeeName, String employeeSurname,String employeeMail){
-        return new BaseEmployee(employeeName,employeeSurname,employeeMail);
+    public static EntityEmployee getBaseEmployee(String name, String surname, String mail, String password){
+        return new EntityEmployee(name, surname,mail,password);
     }
 
-    public String getEmployeeName() {
-        return employeeName;
+    public String getName() {
+        return name;
     }
 
-    public String getEmployeeSurname() {
-        return employeeSurname;
+    public String getSurname() {
+        return surname;
     }
 
-    public String getEmployeeMail() {
-        return employeeMail;
+    public String getMail() {
+        return mail;
+    }
+    public String getPassword() {
+        return password;
     }
 
     public Access getAccess() {
@@ -60,11 +68,9 @@ public class BaseEmployee {
         this.backlogItem = backlogItem;
     }
 
-    public Object getUsername() {
-        return null;
+
+    public boolean authenticate(String enteredPassword) {
+        return Objects.equals(password, enteredPassword);
     }
 
-    public boolean authenticate(String password) {
-        return false;
-    }
 }

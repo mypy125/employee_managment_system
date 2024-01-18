@@ -1,8 +1,8 @@
 package org.example.model;
 
-import org.example.model.employee.BaseEmployee;
+import org.example.model.employee.EntityEmployee;
 
-public interface LoginUser <T extends BaseEmployee>{
+public interface LoginUser <T extends EntityEmployee>{
     T login(String username, String password);
 
 
