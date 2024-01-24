@@ -1,15 +1,19 @@
-package org.example.model.todoTaskSprint;
+package org.example.domain.sprint;
+
+import org.example.domain.Entity;
 
 import java.time.LocalDate;
 
-public class Task {
+public class Sprint implements Entity {
 //----------------------------------------------region fill
+    private int id;
     private String description;
     private Priority priority;
     private LocalDate endDate;
     private boolean done;
 //-----------------------------------------------------region construction
-    public Task(String description,Priority priority,LocalDate endDate){
+    public Sprint(int id, String description, Priority priority, LocalDate endDate){
+        this.id = id;
         this.description = description;
         this.priority = priority;
         this.endDate = endDate;
@@ -35,5 +39,10 @@ public class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public int getId() {
+        return id;
     }
 }
