@@ -24,4 +24,12 @@ public class Department implements Entity {
     public int getId() {
         return departmentId;
     }
+
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
 }

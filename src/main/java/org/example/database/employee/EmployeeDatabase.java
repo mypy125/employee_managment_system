@@ -1,4 +1,4 @@
-package org.example.database;
+package org.example.database.employee;
 
 public class EmployeeDatabase {
     EmployeeTable employeeTable = new EmployeeTable();

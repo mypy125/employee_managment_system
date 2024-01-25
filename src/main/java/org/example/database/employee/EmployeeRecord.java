@@ -1,4 +1,4 @@
-package org.example.database;
+package org.example.database.employee;
 
 import org.example.domain.employee.Access;
 

@@ -1,4 +1,4 @@
-package org.example.database;
+package org.example.database.employee;
 
 import java.util.ArrayList;
 import java.util.Collection;
