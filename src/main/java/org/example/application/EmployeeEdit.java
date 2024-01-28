@@ -16,7 +16,7 @@ public class EmployeeEdit implements EmployeeEditor {
     }
     @Override
     public boolean add(Employee item) {
-        databaseContext.getAll().add(item);
+        databaseContext.getAllEmployee().add(item);
         return databaseContext.saveChanges();
     }
 
@@ -39,17 +39,17 @@ public class EmployeeEdit implements EmployeeEditor {
 
     @Override
     public boolean remove(Employee item) {
-        databaseContext.getAll().remove(item);
+        databaseContext.getAllEmployee().remove(item);
         return databaseContext.saveChanges();
     }
 
     @Override
     public Optional<Employee> getById(Integer integer) {
-        return databaseContext.getAll().stream().filter(p -> p.getId() == integer).findFirst();
+        return databaseContext.getAllEmployee().stream().filter(p -> p.getId() == integer).findFirst();
     }
 
     @Override
     public Collection<Employee> getAll() {
-        return databaseContext.getAll();
+        return databaseContext.getAllEmployee();
     }
 }
