@@ -1,5 +1,6 @@
 package org.example.application;
 
+import org.example.application.interfaces.EmployeePresenter;
 import org.example.application.interfaces.context.EmployeeDatabaseContext;
 import org.example.application.interfaces.EmployeeEditor;
 import org.example.domain.employee.Employee;
@@ -9,10 +10,17 @@ import java.util.Optional;
 
 public class EmployeeEdit implements EmployeeEditor {
 
-    EmployeeDatabaseContext databaseContext;
-    public EmployeeEdit(EmployeeDatabaseContext databaseContext){
+    private final EmployeeDatabaseContext databaseContext;
+    private final EmployeePresenter employeePresenter;
+    public EmployeeEdit(EmployeePresenter employeePresenter,
+                        EmployeeDatabaseContext databaseContext){
+        this.employeePresenter = employeePresenter;
         this.databaseContext = databaseContext;
 
+    }
+    @Override
+    public void printAll() {
+        employeePresenter.printAll(getAll());
     }
     @Override
     public boolean add(Employee item) {
@@ -52,4 +60,6 @@ public class EmployeeEdit implements EmployeeEditor {
     public Collection<Employee> getAll() {
         return databaseContext.getAllEmployee();
     }
+
+
 }
