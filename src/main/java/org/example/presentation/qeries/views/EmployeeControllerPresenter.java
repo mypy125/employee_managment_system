@@ -1,6 +1,6 @@
 package org.example.presentation.qeries.views;
 
-import org.example.application.interfaces.EmployeePresenter;
+import org.example.application.interfaces.presenters.EmployeePresenter;
 import org.example.domain.employee.Employee;
 
 import java.util.Collection;

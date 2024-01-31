@@ -1,6 +1,6 @@
 package org.example.application;
 
-import org.example.application.interfaces.EmployeePresenter;
+import org.example.application.interfaces.presenters.EmployeePresenter;
 import org.example.application.interfaces.context.EmployeeDatabaseContext;
 import org.example.application.interfaces.EmployeeEditor;
 import org.example.domain.employee.Employee;

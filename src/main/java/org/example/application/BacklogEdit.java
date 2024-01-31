@@ -2,6 +2,7 @@ package org.example.application;
 
 import org.example.application.interfaces.BacklogEditor;
 import org.example.application.interfaces.context.BacklogDatabaseContext;
+import org.example.application.interfaces.presenters.BacklogPresenter;
 import org.example.domain.backlog.Backlog;
 import org.example.domain.employee.Employee;
 
@@ -9,10 +10,17 @@ import java.util.Collection;
 import java.util.Optional;
 
 public class BacklogEdit implements BacklogEditor {
-    private BacklogDatabaseContext databaseContext;
+    private final BacklogDatabaseContext databaseContext;
+    private final BacklogPresenter backlogPresenter;
 
-    public BacklogEdit(BacklogDatabaseContext databaseContext) {
+    public BacklogEdit(BacklogPresenter backlogPresenter,
+                       BacklogDatabaseContext databaseContext) {
+        this.backlogPresenter = backlogPresenter;
         this.databaseContext = databaseContext;
+    }
+    @Override
+    public void printAll() {
+        backlogPresenter.printAll(getAll());
     }
 
     @Override
@@ -51,4 +59,6 @@ public class BacklogEdit implements BacklogEditor {
     public Collection<Backlog> getAll() {
         return databaseContext.getAllBacklog();
     }
+
+
 }

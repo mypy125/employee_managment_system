@@ -17,6 +17,6 @@ public class EmployeeController extends Controller{
     }
 
     void routGetAll(){
-        this.employeeEditor.getAll();
+        this.employeeEditor.printAll();
     }
 }
