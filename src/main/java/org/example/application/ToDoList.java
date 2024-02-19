@@ -20,12 +20,12 @@ public class ToDoList{
     }
 //-----------------------------------------------------------region method
     public void addTask(String description, Priority priority, LocalDate endDate) {
-        sprints.add(new Sprint(1,description,priority,endDate));
+        sprints.add(new Sprint());
     }
 
     public void markTaskAsDone(int taskIndex) {
         if (isValidIndex(taskIndex)) {
-            sprints.get(taskIndex).markAsDone();
+            sprints.get(taskIndex).isDone();
         } else {
             System.out.println("Invalid task index");
         }

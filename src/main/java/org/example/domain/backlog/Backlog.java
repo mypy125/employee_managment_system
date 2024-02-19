@@ -12,14 +12,16 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "backlog")
+@Table(name = "backlogs")
 public class Backlog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String description;
+    @Column(name = "start_date")
     private LocalDate startDate;
+    @Column(name = "end_date")
     private LocalDate endDate;
 
 }

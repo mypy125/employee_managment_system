@@ -12,13 +12,14 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "sprint")
+@Table(name = "sprints")
 public class Sprint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String description;
     private Priority priority;
+    @Column(name = "end_date")
     private LocalDate endDate;
     private boolean done;
 }

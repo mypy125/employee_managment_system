@@ -12,12 +12,14 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "department")
+@Table(name = "departments")
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "department_id")
     private int departmentId;
+    @Column(name = "department_name")
     private String departmentName;
 
 }
