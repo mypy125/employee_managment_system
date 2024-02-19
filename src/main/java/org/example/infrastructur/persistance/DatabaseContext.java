@@ -65,6 +65,7 @@ public class DatabaseContext extends DbContext implements EmployeeDatabaseContex
        for(DepartmentRecord department: ((DepartmentDatabase)database).getDepartmentTable().getRecords()){
            departments.add(new Department(
                    department.getDepartmentId(),
+                  department.getDepartmentId(),
                    department.getDepartmentName()
            ));
        }
@@ -79,7 +80,8 @@ public class DatabaseContext extends DbContext implements EmployeeDatabaseContex
                     sprint.getId(),
                     sprint.getDescription(),
                     sprint.getPriority(),
-                    sprint.getEndDate()
+                    sprint.getEndDate(),
+                    sprint.isDone()
             ));
         }
         return sprints;

@@ -22,10 +22,7 @@
       <property name="hibernate.hbm2ddl.auto">update</property>
 
       <!--Mention annotated entity class-->
-      <mapping class="org.example.domain.Entity"/>
       <mapping class="org.example.domain.employee.Employee"/>
-      <mapping class="org.example.domain.employee.Access"/>
-      <mapping class="org.example.domain.employee.EmployeeType"/>
       <mapping class="org.example.domain.backlog.Backlog"/>
       <mapping class="org.example.domain.department.Department"/>
     <!-- DB schema will be updated if needed -->

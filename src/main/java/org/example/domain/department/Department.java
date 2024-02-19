@@ -1,35 +1,23 @@
 package org.example.domain.department;
 
-import org.example.domain.Entity;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public class Department implements Entity {
-//------------------------------------------region fill
+import javax.persistence.*;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Entity
+@Table(name = "department")
+public class Department {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     private int departmentId;
     private String departmentName;
-//----------------------------------------------region construction
 
-
-    public Department(int departmentId, String departmentName) {
-        this.departmentId = departmentId;
-        this.departmentName = departmentName;
-    }
-
-    //-----------------------------------------------region get and set
-
-    public String getDepartmentName() {
-        return departmentName;
-    }
-
-    @Override
-    public int getId() {
-        return departmentId;
-    }
-
-    public void setDepartmentId(int departmentId) {
-        this.departmentId = departmentId;
-    }
-
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
-    }
 }
