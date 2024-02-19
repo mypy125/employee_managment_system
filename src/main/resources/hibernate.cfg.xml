@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="connection.url">jdbc:mysql://localhost:3308</property>
+    <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+     <property name="connection.username">root</property>
+     <property name="connection.password">pass</property>
+      
+      <!--connect Dialect-->
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+
+      <!--echo all executed SQL to stdout-->
+      <property name="hibernate.show_sql">true</property>
+
+      <!--context Configuration-->
+      <property name="hibernate.current_session_context_class">thread</property>
+
+      <!--Drop and re-create the database schema on startup-->
+      <property name="hibernate.hbm2ddl.auto">update</property>
+
+      <!--Mention annotated entity class-->
+      <mapping class="org.example.domain.Entity"/>
+      <mapping class="org.example.domain.employee.Employee"/>
+      <mapping class="org.example.domain.employee.Access"/>
+      <mapping class="org.example.domain.employee.EmployeeType"/>
+      <mapping class="org.example.domain.backlog.Backlog"/>
+      <mapping class="org.example.domain.department.Department"/>
+    <!-- DB schema will be updated if needed -->
+    <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+  </session-factory>
+</hibernate-configuration>
