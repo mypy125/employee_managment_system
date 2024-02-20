@@ -1,8 +1,9 @@
 package org.example.fileHandel;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 public interface Writable {
-    boolean saveToFile(Serializable serializable, String filePath);
-    Object readFromFile(String path);
+    void saveToFile(String fileName, Collection<Object> objects);
+    Collection<Object> loadFromFile(String fileName);
 }

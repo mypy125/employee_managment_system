@@ -10,10 +10,9 @@ import java.util.Collection;
 public class JdbcRunner {
     public static void main(String[] args) throws SQLException {
         Class<Driver> driverClass = Driver.class;
-        Employee employee1 = new Employee(1,"Maxim","Nekrasov","example@org",1250.15,"root123",Access.SECOND);
-        Employee employee = new Employee();
+        Employee employee = new Employee(1,"Maxim","Nekrasov","example@org",1250.15,"root123",Access.SECOND);
+
         try(Connection connection = ConnectionManager.open()) {
-            System.out.println(connection.getTransactionIsolation());
 
             createDatabase(connection);
             System.out.println("database created.");
@@ -27,27 +26,35 @@ public class JdbcRunner {
             insertData(connection, employee);
             System.out.println("insert employee.");
 
+            readData(connection);
+            System.out.println("reading data.");
         }
 
 
     }
     
      private static void createDatabase(Connection connection) throws SQLException {
-        String createDatabaseSQL =  "CREATE DATABASE IF NOT EXISTS EmployeeDB;";
+        String createDatabaseSQL = """
+                CREATE DATABASE IF NOT EXISTS EmployeeDB;
+                """;
         try (PreparedStatement statement = connection.prepareStatement(createDatabaseSQL)) {
             statement.execute();
         }
     }
 
     private static void useDatabase(Connection connection) throws SQLException {
-        String useDatabaseSQL =  "USE EmployeeDB;";
+        String useDatabaseSQL = """
+                USE EmployeeDB;
+                """;
         try (PreparedStatement statement = connection.prepareStatement(useDatabaseSQL)) {
             statement.execute();
         }
     }
 
     private static void createTable(Connection connection) throws SQLException {
-        String createTableSQL = "CREATE TABLE IF NOT EXISTS employees (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), surname VARCHAR(255), mail VARCHAR(255), salary VARCHAR(255),password DOUBLE, access VARCHAR(255));";
+        String createTableSQL = """
+                CREATE TABLE IF NOT EXISTS employees (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), surname VARCHAR(255), mail VARCHAR(255), salary VARCHAR(255),password DOUBLE, access VARCHAR(255));
+                """;
         try (PreparedStatement statement = connection.prepareStatement(createTableSQL)) {
             statement.execute();
         }
@@ -60,7 +67,9 @@ public class JdbcRunner {
      * @throws SQLException Исключение при выполнении запроса
      */
     private static void insertData(Connection connection, Employee employee) throws SQLException {
-        String insertDataSQL = "INSERT INTO employees (id, name, surname, mail, salary, password, acces) VALUES (?, ?, ?, ?, ?, ?, ?);";
+        String insertDataSQL = """
+                INSERT INTO employees (id, name, surname, mail, salary, password, acces) VALUES (?, ?, ?, ?, ?, ?, ?);
+                """;
         try (PreparedStatement statement = connection.prepareStatement(insertDataSQL)) {
             statement.setInt(1, employee.getId());
             statement.setString(2, employee.getName());
@@ -81,7 +90,9 @@ public class JdbcRunner {
      */
     private static Collection<Employee> readData(Connection connection) throws SQLException {
         ArrayList<Employee> studentsList = new ArrayList<>();
-        String readDataSQL = "SELECT * FROM employees;";
+        String readDataSQL = """
+                SELECT * FROM employees;
+                """;
         try (PreparedStatement statement = connection.prepareStatement(readDataSQL)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -105,7 +116,9 @@ public class JdbcRunner {
      * @throws SQLException Исключение при выполнении запроса
      */
     private static void updateData(Connection connection, Employee employee) throws SQLException {
-        String updateDataSQL = "UPDATE students SET name=?, surname=?, mail=?, sallary=?, password=?, acces=? WHERE id=?;";
+        String updateDataSQL = """
+                UPDATE students SET name=?, surname=?, mail=?, sallary=?, password=?, acces=? WHERE id=?;
+                """;
         try (PreparedStatement statement = connection.prepareStatement(updateDataSQL)) {
             statement.setString(1, employee.getName());
             statement.setString(2, employee.getSurname());
@@ -124,7 +137,9 @@ public class JdbcRunner {
      * @throws SQLException Исключение при выполнении запроса
      */
     private static void deleteData(Connection connection, int id) throws SQLException {
-        String deleteDataSQL = "DELETE FROM students WHERE id=?;";
+        String deleteDataSQL = """
+                DELETE FROM students WHERE id=?;
+                """;
         try (PreparedStatement statement = connection.prepareStatement(deleteDataSQL)) {
             statement.setLong(1, id);
             statement.executeUpdate();
