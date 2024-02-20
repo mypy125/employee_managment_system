@@ -18,7 +18,7 @@ public class FileManagement implements Writable{
 
 
     @Override
-    public void saveToFile(String fileName, Collection<Object> objects) {
+    public void saveToFile(String fileName, List<?> objects) {
 
         try {
             if (fileName.endsWith(".json")) {
