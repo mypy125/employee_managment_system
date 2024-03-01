@@ -2,7 +2,7 @@ package org.example;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
+import java.util.HashMap;
 
 
 public class ClientManager implements Runnable{
@@ -10,15 +10,17 @@ public class ClientManager implements Runnable{
     private BufferedWriter writer;
     private Socket socket;
     private String name;
-    public static ArrayList<ClientManager> clients = new ArrayList<>();
+    public static HashMap<String, ClientManager> clients = new HashMap<>();
 
     public ClientManager(Socket socket){
         try{
             this.socket = socket;
             writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            clients.add(this);
+
             name = reader.readLine();
+            clients.put(name,this);
+            System.out.println("Server: " + name + " connected to chat..");
             broadcastMassage("Server: " + name + " connected to chat.");
 
         }catch (Exception e){
@@ -28,7 +30,7 @@ public class ClientManager implements Runnable{
     }
 
     private void broadcastMassage(String massage){
-        for(ClientManager client : clients){
+        for(ClientManager client : clients.values()){
             try{
                 if(!client.name.equals(name) && massage != null){
                     client.writer.write(massage);
@@ -59,7 +61,7 @@ public class ClientManager implements Runnable{
     }
 
     private void removeClient() {
-        clients.remove(this);
+        clients.remove(name,this);
         broadcastMassage("Server: " + name + " client closed chat");
     }
 
@@ -71,12 +73,55 @@ public class ClientManager implements Runnable{
         while (socket.isConnected()){
             try{
                 massageFromClient = reader.readLine();
-                broadcastMassage(massageFromClient);
+                if(massageFromClient.startsWith("@",5)){
+                    ClientManager client = (ClientManager) searchNameFromMassage(massageFromClient,clients);
+                    if(client != null)privateMessageClient(client,massageFromClient);
+
+                }else {
+                    // Отправка данных всем слушателям
+                    broadcastMassage(massageFromClient);
+                }
 
             }catch (Exception e){
                 closeEverything(socket, writer, reader);
             }
 
         }
+    }
+
+    private static Object searchNameFromMassage(String message, HashMap<?, ?> clients) {
+        Object client = null;
+        if (message != null && message.startsWith("@",5)) {
+            String[] names = message.substring(6).split("\\s+");
+
+            for (String name : names) {
+                if (clients.containsKey(name)) {
+                    client = clients.get(name);
+                    break;
+                }
+            }
+        }
+        return client;
+    }
+
+    private Object equalsNameFromMap(String s, HashMap<?, ?> clients){
+        Object clientManager = null;
+        if(s != null && clients.containsKey(s)){
+            clientManager = clients.get(s);
+        }
+        return clientManager;
+    }
+
+    private void privateMessageClient(ClientManager client, String message){
+        ClientManager privatMassage = client;
+        try {
+            privatMassage.writer.write(message);
+            privatMassage.writer.newLine();
+            privatMassage.writer.flush();
+
+        } catch (Exception e) {
+            closeEverything(socket, writer, reader);
+        }
+
     }
 }
