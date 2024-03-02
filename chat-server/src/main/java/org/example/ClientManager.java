@@ -73,7 +73,8 @@ public class ClientManager implements Runnable{
         while (socket.isConnected()){
             try{
                 massageFromClient = reader.readLine();
-                if(massageFromClient.startsWith("@",5)){
+                String[] msg = massageFromClient.split("\\s+");
+                if(msg[1].startsWith("@")){
                     ClientManager client = (ClientManager) searchNameFromMassage(massageFromClient,clients);
                     if(client != null)privateMessageClient(client,massageFromClient);
 
@@ -91,9 +92,8 @@ public class ClientManager implements Runnable{
 
     private static Object searchNameFromMassage(String message, HashMap<?, ?> clients) {
         Object client = null;
-        if (message != null && message.startsWith("@",5)) {
-            String[] names = message.substring(6).split("\\s+");
-
+        if (message != null ) {
+            String[] names = message.split("\\s+");
             for (String name : names) {
                 if (clients.containsKey(name)) {
                     client = clients.get(name);

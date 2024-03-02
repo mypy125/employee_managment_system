@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         Scanner scanner = new Scanner(System.in);
-        System.out.println("next on name.");
+        System.out.println("Writhe your name...");
         String name = scanner.nextLine();
         InetAddress address = InetAddress.getLocalHost();
 
